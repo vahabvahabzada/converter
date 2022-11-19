@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Converter</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"></div>
+        <div class="menubar">
+            <div id="bank"><a href="">БАНК</a></div>
+            <div><a href="">БИЗНЕС</a></div>
+            <div><a href="">ИНВЕСТИЦИИ</a></div>
+            <div><a href="">СТРАХОВАНИЕ</a></div>
+            <div><a href="">МОБАЙЛ</a></div>
+            <div><a href="">ПУТЕШЕСТВИЯ</a></div>
+            <div><a href="">РАЗВЛЕЧЕНИЯ</a></div>
+            <button>ВОЙТИ</button>
+        </div>
+    </div>
+    
+    <div class="main">
+        <h1>Конвертер валют онлайн</h1>
+        <div id="from">
+            <p id="pfrom">У меня есть </p>
+            <div class="currency">
+                <button class="base">RUB</button>
+                <button class="base">USD</button>
+                <button class="base">EUR</button>
+                <button class="base">GBP</button>
+            </div>
+
+            <div class="amount">
+                <input type="number" id="inpbase" placeholder="0">
+                <p id="in"></p>
+            </div>
+        </div>
+        <div id="to">
+            <p id="pto">Хочу приобрести</p>
+            <div class="currency">
+                <button class="to">RUB</button>
+                <button class="to">USD</button>
+                <button class="to">EUR</button>
+                <button class="to">GBP</button>
+            </div>
+            <div class="amount">
+                <input type="number" id="inpto" placeholder="0">
+                <p id="out"></p>
+            </div>
+        </div>
+    </div>
+    <script src="controller.js"></script>
+</body>
+</html>
