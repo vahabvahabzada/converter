@@ -4,19 +4,17 @@ let inpto=document.querySelector('#inpto');
 let pin=document.querySelector('#in');
 let pout=document.querySelector('#out');
 
-
+//declaring to boolean variables to use to which input area user is writing "base" or "to" amount 
 let baseIsEntered=false;
 let toIsEntered=false;
+
 //implementing getDataFrom and setDataTo functions to change values of input panels dynamically
 function getDataFrom(source){
-    //return inpbase.value;
     return source.value;
 }
 function setDataTo(target,newValue){
-    //inpto.value=newValue;
     target.value=newValue;
 }
-
 
 //implementing events for currency buttons
 let base;
@@ -36,11 +34,13 @@ for(let i=0;i<btnsBase.length;i++){
         if(to!==undefined && baseIsEntered===true){//for the first time user can forget to choose output currency,so we should consider this
             fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${to}`)
             .then(response=>response.json())
-            .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`});
+            .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`})
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
 
             fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
             .then(response=>response.json())
             .then(data=>pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`)
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
         }
     })
 
@@ -54,16 +54,17 @@ for(let i=0;i<btnsBase.length;i++){
         if(base!==undefined && baseIsEntered===true){//for the first time user can forget to choose input currency,so we should consider this
             fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${to}`)
             .then(response=>response.json())
-            .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`});
+            .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`})
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
 
             fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
             .then(response=>response.json())
             .then(data=>pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`)
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
         }
     })
 }
 }
-
 function removeEventFromToTo(){
     for(let i=0;i<btnsBase.length;i++){
         //console.log(btns[i]);
@@ -76,11 +77,13 @@ function removeEventFromToTo(){
             if(to!==undefined && baseIsEntered===true){//for the first time user can forget to choose output currency,so we should consider this
                 fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${to}`)
                 .then(response=>response.json())
-                .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`});
+                .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`})
+                .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
     
                 fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
                 .then(response=>response.json())
                 .then(data=>pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`)
+                .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
             }
         })
 
@@ -93,16 +96,17 @@ function removeEventFromToTo(){
             if(base!==undefined && baseIsEntered===true){//for the first time user can forget to choose input currency,so we should consider this
                 fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${to}`)
                 .then(response=>response.json())
-                .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`});
+                .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`})
+                .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
     
                 fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
                 .then(response=>response.json())
                 .then(data=>pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`)
+                .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
             }
         })
     }
 }
-
 /*for output panel*/
 function addEventToToFrom(){
 for(let i=0;i<btnsTo.length;i++){
@@ -116,11 +120,13 @@ for(let i=0;i<btnsTo.length;i++){
         if(base!==undefined && toIsEntered===true){//for the first time user can forget to choose input currency,so we should consider this
             fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
             .then(response=>response.json())
-            .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base]);pin.textContent=`1 ${to} = ${data.rates[base]} ${base}`});
+            .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base]);pin.textContent=`1 ${to} = ${data.rates[base]} ${base}`})
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
 
             fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
             .then(response=>response.json())
             .then(data=>pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`)
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
         }
     })
 
@@ -133,16 +139,17 @@ for(let i=0;i<btnsTo.length;i++){
         if(base!==undefined && toIsEntered===true){//for the first time user can forget to choose input currency,so we should consider this
             fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
             .then(response=>response.json())
-            .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base]);pin.textContent=`1 ${to} = ${data.rates[base]} ${base}`});
+            .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base]);pin.textContent=`1 ${to} = ${data.rates[base]} ${base}`})
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
 
             fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
             .then(response=>response.json())
             .then(data=>pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`)
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
         }
     })
 }
 }
-
 function removeEventToToFrom(){
     for(let i=0;i<btnsTo.length;i++){
         //console.log(btns[i]);
@@ -155,11 +162,13 @@ function removeEventToToFrom(){
             if(base!==undefined && toIsEntered===true){//for the first time user can forget to choose input currency,so we should consider this
                 fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
                 .then(response=>response.json())
-                .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[to]);pin.textContent=`1 ${to} = ${data.rates[base]} ${base}`});
+                .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[to]);pin.textContent=`1 ${to} = ${data.rates[base]} ${base}`})
+                .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
     
                 fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
                 .then(response=>response.json())
                 .then(data=>pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`)
+                .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
             }
         })
 
@@ -172,28 +181,33 @@ function removeEventToToFrom(){
             if(base!==undefined && toIsEntered===true){//for the first time user can forget to choose input currency,so we should consider this
                 fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
                 .then(response=>response.json())
-                .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base]);pin.textContent=`1 ${to} = ${data.rates[base]} ${base}`});
+                .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base]);pin.textContent=`1 ${to} = ${data.rates[base]} ${base}`})
+                .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
     
                 fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
                 .then(response=>response.json())
                 .then(data=>pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`)
+                .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
             }
         })
     }
-    }
-/*btnsBase[0].style.background='#833AE0';
+}
+
+//selecting RUB and USD as default for the first time,when page is loaded
+btnsBase[0].style.background='#833AE0';
 btnsTo[1].style.background='#833AE0';
 base=btnsBase[0].textContent;
 to=btnsTo[1].textContent;
-inpbase.addEventListener('input',function(){
-    fetch(`https://api.exchangerate.host/latest?base=${btnsBase[0].textContent}&symbols=${btnsTo[1].textContent}`)
-    .then(response=>response.json())
-    .then(data=>{setDataTo(getDataFrom()*data.rates[btnsTo[1].textContent]);pin.textContent=`1 ${btnsBase[0].textContent} = ${data.rates[btnsTo[1].textContent]} ${btnsTo[1].textContent}`});
 
-    fetch(`https://api.exchangerate.host/latest?base=${btnsTo[1].textContent}&symbols=${btnsBase[0].textContent}`)
-    .then(response=>response.json())
-    .then(data=>pout.textContent=`1 ${btnsTo[1].textContent} = ${data.rates[btnsBase[0].textContent]} ${btnsBase[0].textContent}`)
-})*/
+fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${to}`)
+.then(response=>response.json())
+.then(data=>{pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`})
+.catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
+
+fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
+.then(response=>response.json())
+.then(data=>{pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`})
+.catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
 
 /*adding input listener to input panel to make our application alive*/
 function addListener_inpbase(){
@@ -204,10 +218,16 @@ inpbase.addEventListener('input',function(){
     removeEventToToFrom();//sag terefin sola vermesini legv etmek
     if(base!==undefined && to!==undefined){
         fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${to}`)
-            .then(response=>response.json())
-            .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to])});
+        .then(response=>response.json())
+        .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`})
+        .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
+        
+        fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
+        .then(response=>response.json())
+        .then(data=>{pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`})
+        .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
     }
-    addEventToToFrom();
+    //addEventToToFrom();
 })
 }
 function removeListener_inpbase(){
@@ -218,12 +238,18 @@ function removeListener_inpbase(){
         removeEventToToFrom();
         if(base!==undefined && to!==undefined){
             fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${to}`)
-                .then(response=>response.json())
-                .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to])});
+            .then(response=>response.json())
+            .then(data=>{setDataTo(inpto,getDataFrom(inpbase)*data.rates[to]);pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`})
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
+            
+            fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
+            .then(response=>response.json())
+            .then(data=>{pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`})
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
         }
         addEventToToFrom();
     })
-    }
+}
 function addListener_inpto(){
 inpto.addEventListener('input',function(){
     baseIsEntered=false;
@@ -231,8 +257,14 @@ inpto.addEventListener('input',function(){
     removeListener_inpbase();//en teze yazdim
     removeEventFromToTo();//sol terefin saga vermesini legv etmek
         fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
-            .then(response=>response.json())
-            .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base])});
+        .then(response=>response.json())
+        .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base]);pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`})
+        .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
+        
+        fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${to}`)
+        .then(response=>response.json())
+        .then(data=>{pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`})
+        .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
 
     addEventFromToTo();
 })
@@ -244,19 +276,46 @@ function removeListener_inpto(){
         removeListener_inpbase();
         removeEventFromToTo();//sol terefin saga vermesini legv etmek
             fetch(`https://api.exchangerate.host/latest?base=${to}&symbols=${base}`)
-                .then(response=>response.json())
-                .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base])});
+            .then(response=>response.json())
+            .then(data=>{setDataTo(inpbase,getDataFrom(inpto)*data.rates[base]);pout.textContent=`1 ${to} = ${data.rates[base]} ${base}`})
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
+            
+            fetch(`https://api.exchangerate.host/latest?base=${base}&symbols=${to}`)
+            .then(response=>response.json())
+            .then(data=>{pin.textContent=`1 ${base} = ${data.rates[to]} ${to}`})
+            .catch(error=>{console.log(`Something went wrong! ${error.message}`)})//catching error
     
         addEventFromToTo();
     })
 }
 
-addEventFromToTo();
-addEventToToFrom();
-addListener_inpbase();
-addListener_inpto();
+//changing background of each input panel on focus
+let panels=[];
+for(let i=0;i<document.querySelectorAll('input');i++){
+    //panels.push(document.querySelectorAll('input')[i]);
+    document.querySelectorAll('input')[i].addEventListener("focusin",function(){
+        document.querySelectorAll('input')[i].style.background='#833AE0';
+    })
+}
 
+//app function
+function app(){
+    addEventFromToTo();
+    addEventToToFrom();
+    addListener_inpbase();
+    addListener_inpto();
+}
+//changing backgrount on focus events
+for(let i=0;i<document.querySelectorAll('.amount').length;i++){
+    document.querySelectorAll('.amount')[i].addEventListener('focusin',function(){
+        document.querySelectorAll('.amount')[i].style.background='#E5E5E5';
+        document.querySelectorAll('input')[i].style.background='#E5E5E5';
+    })
 
-/*meyarlarda,sag terfe eded daxil edilende solun saga uygun cevrilmesi ve error haqqinda melumat hissesini implement etmek*/
-
-/* uje demek olar ki isleyir sadece ilkin halda RUB ve USD secilmesini implement etmek ve error/exception handling hissesini implement etmek lazimdir*/
+    document.querySelectorAll('.amount')[i].addEventListener('focusout',function(){
+        document.querySelectorAll('.amount')[i].style.background='transparent';
+        document.querySelectorAll('input')[i].style.background='transparent';
+    })
+}
+//starting app
+app();
